@@ -2,7 +2,11 @@
  * This module is responsible for managing player data.
  */
 
-export function playerPerformanceRating(player: Player): number {
+export function playerPerformanceRating(player: Player | undefined): number {
+    if (player === undefined){
+        return 0;
+    }
+    
     const totalGames = player.wins + player.losses;
 
     if (totalGames === 0) {
@@ -11,6 +15,12 @@ export function playerPerformanceRating(player: Player): number {
     const rating = (player.wins / totalGames) * 100 + (player.totalScore / totalGames);
 
     return parseFloat(rating.toFixed(2));
+}
+
+export function findPlayer(playerId: string): Player | undefined {
+    const idResult: Player | undefined = samplePlayers.find(player => player.id === parseInt(playerId))
+
+    return idResult
 }
 
 export interface Player {
@@ -34,4 +44,4 @@ let samplePlayers =
     }
     ];
 
-export {Player};
+export {samplePlayers };

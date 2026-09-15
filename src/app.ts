@@ -1,7 +1,7 @@
 // import the express application and type definition
 import express, { Express } from "express";
 
-import { playerPerformanceRating, Player } from "./services/playerService";
+import { playerPerformanceRating, Player, samplePlayers, findPlayer} from "./services/playerService";
 
 // initialize the express application
 const app: Express = express();
@@ -12,7 +12,6 @@ interface HealthCheckResponse {
     timestamp: string;
     version: string;
 }
-
 
 
 // respond to GET request at endpoint "/" with message
@@ -44,14 +43,14 @@ app.get("/api/v1/players", (req, res) => {
 });
 
 app.get("/api/v1/players/:id", (req, res) => {
-    const id = req.;
+    const id = req.params.id || "404 not found."
 });
 
 app.get("/api/v1/players/:id/rating", (req, res) => {
-    res.json({
-        "count" : Array.length,
-        "data" : samplePlayers
-    });
+    const id = req.params.id || "404 not found."
+
+    const calledPlayer: Player | undefined = findPlayer(id)
+    const playerPerformance: number = playerPerformanceRating(calledPlayer);
 });
 
 
