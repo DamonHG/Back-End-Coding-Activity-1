@@ -39,11 +39,13 @@ app.get("/api/v1/players", (req, res) => {
         "count" : Array.length,
         "data" : samplePlayers
     });
-    //res.json(length, samplePlayers);
 });
 
 app.get("/api/v1/players/:id", (req, res) => {
     const id = req.params.id || "404 not found."
+    const calledPlayer: Player | undefined = findPlayer(id)
+
+    res.json(calledPlayer);
 });
 
 app.get("/api/v1/players/:id/rating", (req, res) => {
@@ -51,6 +53,8 @@ app.get("/api/v1/players/:id/rating", (req, res) => {
 
     const calledPlayer: Player | undefined = findPlayer(id)
     const playerPerformance: number = playerPerformanceRating(calledPlayer);
+
+    res.json(playerPerformance)
 });
 
 // export app and server for testing
