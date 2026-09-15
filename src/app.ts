@@ -53,6 +53,5 @@ app.get("/api/v1/players/:id/rating", (req, res) => {
     const playerPerformance: number = playerPerformanceRating(calledPlayer);
 });
 
-
 // export app and server for testing
 export default app;
