@@ -1,6 +1,8 @@
 // import the express application and type definition
 import express, { Express } from "express";
 
+import { playerPerformanceRating, Player } from "./services/playerService";
+
 // initialize the express application
 const app: Express = express();
 
@@ -11,26 +13,7 @@ interface HealthCheckResponse {
     version: string;
 }
 
-export interface Player {
-    id: number;
-    name: string;
-    wins: number;
-    losses: number;
-    totalScore: number;
-}
 
-let samplePlayers =
-    [
-    {
-        id: 1, name: "ShadowStrike", wins: 15, losses: 5, totalScore: 28500,
-    },
-    {
-        id: 2, name: "NoobMaster", wins: 3, losses: 12, totalScore: 4200,
-    },
-    {
-        id: 3, name: "ProGamer99", wins: 0, losses: 0, totalScore: 0
-    }    
-    ];
 
 // respond to GET request at endpoint "/" with message
 app.get("/", (req, res) => {
@@ -51,6 +34,26 @@ app.get("/api/v1/health", (req, res) => {
 
     res.json(healthData);
 });
+
+app.get("/api/v1/players", (req, res) => {
+    res.json({
+        "count" : Array.length,
+        "data" : samplePlayers
+    });
+    //res.json(length, samplePlayers);
+});
+
+app.get("/api/v1/players/:id", (req, res) => {
+    const id = req.;
+});
+
+app.get("/api/v1/players/:id/rating", (req, res) => {
+    res.json({
+        "count" : Array.length,
+        "data" : samplePlayers
+    });
+});
+
 
 // export app and server for testing
 export default app;
